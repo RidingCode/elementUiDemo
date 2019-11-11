@@ -3,16 +3,17 @@
     <div class="login-box">
       <h2 class="login-title">登录</h2>
       <el-form :model="usermsg" :rules="rules" ref="usermsg" label-width="100px" >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="usermsg.username"></el-input>
+        <el-form-item label="用户名" prop="phone">
+          <el-input v-model="usermsg.phone"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="usermsg.password" type="password"></el-input>
+        <el-form-item label="密码" prop="passwd">
+          <el-input v-model="usermsg.passwd" type="passwd"></el-input>
         </el-form-item>
          <el-form-item label-width="220px">
            <el-button @click="resetForm()">重置</el-button>
-          <el-button type="primary" >登录</el-button>
+          <el-button type="primary" @click="login()" >登录</el-button>
         </el-form-item>
+        <footer>@copyright xxxxxxxxxxxxxx</footer>
       </el-form>
     </div>
   </div>
@@ -26,17 +27,18 @@ export default {
   data () {
     return {
       usermsg: {
-        username: '',
-        password: ''
+        phone: '13594347817',
+        passwd: '123456',
+        key: '00d91e8e0cca2b76f515926a36db68f5'
       },
       rules: {
-        username: [
+        phone: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
         ],
-        password: [
+        passwd: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
+          { min: 1, max: 12, message: '长度在 1 到 12 个字符', trigger: 'blur' }
         ]
       }
     }
@@ -46,6 +48,15 @@ export default {
   methods: {
     resetForm () {
       this.$refs['usermsg'].resetFields()
+    },
+    login () {
+      this.$refs['usermsg'].validate(valid => {
+        if (valid) {
+          this.$http.post('login', this.usermsg).then(res => {
+            console.log(res)
+          })
+        }
+      })
     }
   }
 }
@@ -88,5 +99,8 @@ export default {
     }
   }
 }
-
+footer{
+  color:#ccc;
+  padding-bottom: 10px;
+}
 </style>
