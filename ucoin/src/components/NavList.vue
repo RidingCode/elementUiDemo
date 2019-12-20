@@ -34,8 +34,8 @@ export default {
     a {
       color: #fff;
       text-decoration: none;
-      display: block;
       line-height: 80px;
+      height: 0;
       text-align: center;
       flex: 1;
     }

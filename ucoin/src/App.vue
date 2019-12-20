@@ -17,6 +17,8 @@ export default {
 
 <style lang="stylus">
 @import url('./assets/css/reset.css');
+*
+  user-select none
 html,body
   width 100vw
   height 100%
